@@ -157,7 +157,9 @@ const STATUS = ["Nova", "Em análise", "Aprovada para envio", "Enviada",
                 "Enviar manualmente", "Descartada", "Retorno recebido"];
 
 let vagas = [];
-let usuario = null;
+// ACESSO TEMPORÁRIO SEM LOGIN — reverter para null e restaurar o fluxo de
+// signInWithOtp quando o login por e-mail voltar a ser exigido.
+let usuario = { id: "5b00525c-9d96-408a-915e-bbbb6dc57dca", email: "acesso direto (sem login)" };
 
 const $ = (id) => document.getElementById(id);
 const classePill = (s) => "s-" + String(s || "Nova").split(" ")[0];
@@ -352,20 +354,10 @@ window.render = render;
 window.pedir = pedir;
 window.carregar = carregar;
 
-sb.auth.onAuthStateChange((_e, sessao) => {
-  usuario = sessao?.user ?? null;
-  $("telaLogin").classList.toggle("hidden", !!usuario);
-  $("telaApp").classList.toggle("hidden", !usuario);
-  if (usuario) carregar();
-});
-
-(async () => {
-  const { data } = await sb.auth.getSession();
-  usuario = data.session?.user ?? null;
-  $("telaLogin").classList.toggle("hidden", !!usuario);
-  $("telaApp").classList.toggle("hidden", !usuario);
-  if (usuario) carregar();
-})();
+// Login desligado temporariamente — sempre mostra o painel direto.
+$("telaLogin").classList.add("hidden");
+$("telaApp").classList.remove("hidden");
+carregar();
 </script>
 </body>
 </html>
