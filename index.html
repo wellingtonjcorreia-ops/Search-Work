@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1F3B4D">
+<title>Candidaturas — Wellington Correia</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+<style>
+  :root{ color-scheme:light; --azul:#1F3B4D; --linha:#E4E7EB; --cinza:#667085; }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body{ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:#F5F6F8; color:#1F2933; margin:0; font-size:15px;
+    padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
+  .wrap{ max-width:1100px; margin:0 auto; padding:16px 14px 40px; }
+  header{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:4px; }
+  h1{ font-size:1.15rem; color:var(--azul); margin:0; }
+  .sub{ color:var(--cinza); font-size:.76rem; margin-bottom:16px; }
+  .acoesHeader{ display:flex; gap:8px; }
+  button{ font:inherit; font-size:.8rem; border-radius:8px; border:1px solid #D0D5DD;
+    background:#fff; color:var(--azul); padding:8px 12px; cursor:pointer; min-height:38px; }
+  button:active{ transform:scale(.98); }
+  button.primary{ background:var(--azul); color:#fff; border-color:var(--azul); }
+  button.ghost{ border:none; background:none; color:var(--cinza); }
+  button.icone{ padding:8px 10px; }
+  button:disabled{ opacity:.5; cursor:not-allowed; }
+  input,select{ font:inherit; font-size:.85rem; padding:9px 11px; border:1px solid #D0D5DD;
+    border-radius:8px; background:#fff; width:100%; }
+  .cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(104px,1fr)); gap:8px; margin-bottom:14px; }
+  .card{ background:#fff; border:1px solid var(--linha); border-radius:11px; padding:11px 12px; }
+  .card .v{ font-size:1.5rem; font-weight:700; color:var(--azul); line-height:1.1; }
+  .card .l{ font-size:.64rem; color:var(--cinza); margin-top:3px; text-transform:uppercase; letter-spacing:.03em; }
+  .bar{ display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:14px; }
+  @media(min-width:700px){ .bar{ grid-template-columns:2fr 1fr 1fr; } }
+  .vaga{ background:#fff; border:1px solid var(--linha); border-radius:11px;
+    padding:13px 14px; margin-bottom:9px; }
+  .vaga.dim{ opacity:.55; }
+  .vaga .topo{ display:flex; justify-content:space-between; gap:10px; align-items:flex-start; }
+  .vaga h3{ margin:0 0 3px; font-size:.94rem; }
+  .vaga h3 a{ color:var(--azul); text-decoration:none; }
+  .vaga h3 a:hover{ text-decoration:underline; }
+  .meta{ color:var(--cinza); font-size:.76rem; }
+  .pts{ font-size:1.15rem; font-weight:700; color:var(--azul); white-space:nowrap; }
+  .pill{ display:inline-block; padding:3px 9px; border-radius:99px; font-size:.68rem; font-weight:600; }
+  .s-Nova{ background:#EEF2F5; color:#475467; }
+  .s-Em\.análise{ background:#FEF3C7; color:#92400E; }
+  .s-Aprovada{ background:#DBEAFE; color:#1E40AF; }
+  .s-Enviada{ background:#D1FAE5; color:#065F46; }
+  .s-Enviar{ background:#FFE4E6; color:#9F1239; }
+  .s-Descartada{ background:#F1F1F1; color:#98A2B3; }
+  .s-Retorno{ background:#E9D5FF; color:#6B21A8; }
+  .acoes{ display:flex; gap:7px; flex-wrap:wrap; margin-top:11px; }
+  .acoes button{ flex:1; min-width:106px; font-size:.78rem; padding:8px 10px; }
+  .robos{ display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:14px; }
+  @media(min-width:700px){ .robos{ grid-template-columns:1fr 1fr; } }
+  .robo{ display:flex; flex-direction:column; gap:8px; background:#fff; border:1px solid var(--linha);
+    border-radius:11px; padding:12px 14px; font-size:.84rem; }
+  .robo.pronto{ border-color:var(--azul); box-shadow:0 0 0 2px rgba(31,59,77,.07); }
+  .robo .linha1{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .robo button{ flex:0 0 auto; }
+  .aviso{ padding:11px 13px; border-radius:9px; font-size:.82rem; margin-bottom:12px; }
+  .aviso.erro{ background:#FEF2F2; border:1px solid #FCA5A5; color:#991B1B; }
+  .aviso.ok{ background:#ECFDF5; border:1px solid #6EE7B7; color:#065F46; }
+  .vazio{ background:#fff; border:1px dashed #D0D5DD; border-radius:11px;
+    padding:34px 20px; text-align:center; color:var(--cinza); }
+  .login{ max-width:390px; margin:14vh auto; background:#fff; border:1px solid var(--linha);
+    border-radius:13px; padding:26px 24px; }
+  .login h1{ margin-bottom:6px; }
+  .login p{ color:var(--cinza); font-size:.83rem; line-height:1.5; }
+  .login button{ width:100%; margin-top:11px; }
+  .hidden{ display:none !important; }
+  .rodape{ margin-top:20px; color:#98A2B3; font-size:.7rem; line-height:1.6; }
+</style>
+</head>
+<body>
+
+<!-- ------------------------------------------------------------------ login -->
+<div id="telaLogin" class="login hidden">
+  <h1>Painel de Candidaturas</h1>
+  <p>Entre com seu e-mail. Você recebe um link de acesso — não existe senha para
+     lembrar nem para vazar.</p>
+  <div id="avisoLogin"></div>
+  <input type="email" id="email" placeholder="seu@email.com" autocomplete="email" inputmode="email">
+  <button class="primary" id="btnEntrar" onclick="entrar()">Enviar link de acesso</button>
+</div>
+
+<!-- ------------------------------------------------------------------ painel -->
+<div id="telaApp" class="wrap hidden">
+  <header>
+    <div>
+      <h1>Candidaturas</h1>
+      <div class="sub" id="sub">carregando…</div>
+    </div>
+    <div class="acoesHeader">
+      <button class="icone" title="Atualizar" onclick="carregar()">↻</button>
+      <button class="ghost" onclick="sair()">sair</button>
+    </div>
+  </header>
+
+  <div id="aviso"></div>
+  <div class="cards" id="cards"></div>
+
+  <div class="robos">
+    <div class="robo" id="roboBusca">
+      <div class="linha1">
+        <div style="min-width:0">
+          <strong>Buscar vagas</strong>
+          <div class="meta" id="buscaTxt">carregando…</div>
+        </div>
+        <button class="primary" id="btnBusca" onclick="pedir('buscar_vagas')">Buscar</button>
+      </div>
+    </div>
+    <div class="robo" id="roboEnvio">
+      <div class="linha1">
+        <div style="min-width:0">
+          <strong>Enviar candidaturas</strong>
+          <div class="meta" id="envioTxt">carregando…</div>
+        </div>
+        <button class="primary" id="btnEnvio" onclick="pedir('processar_aprovadas')">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bar">
+    <input type="search" id="busca" placeholder="Buscar cargo, empresa, palavra-chave…" oninput="render()">
+    <select id="fstatus" onchange="render()"><option value="">Todos os status</option></select>
+    <select id="ordem" onchange="render()">
+      <option value="pontuacao">Maior pontuação</option>
+      <option value="recente">Mais recentes</option>
+      <option value="empresa">Empresa (A-Z)</option>
+    </select>
+  </div>
+
+  <div id="lista"></div>
+
+  <div class="rodape">
+    Aprovar, buscar e enviar gravam direto no Supabase. Buscar e enviar ficam pendentes até
+    alguém processá-los — pelo Cowork no computador (digite "buscar" ou "enviar" numa
+    conversa e roda na hora) ou por uma automação n8n, se configurada. O envio de
+    candidatura sempre depende do Chrome logado no seu Mac.
+  </div>
+</div>
+
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.4";
+
+// ---------------------------------------------------------------- configuração
+// Estes dois valores são públicos por design. Quem protege os dados é a RLS
+// do Supabase, não o segredo da chave. Nunca coloque a service_role aqui.
+const SUPABASE_URL      = window.__ENV?.SUPABASE_URL      || "https://gdhgpbloaftszqeqyoma.supabase.co";
+const SUPABASE_ANON_KEY = window.__ENV?.SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdkaGdwYmxvYWZ0c3pxZXF5b21hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU4NTczNTEsImV4cCI6MjEwMTQzMzM1MX0.moTRIJymTDCI7J2eraqn1TWoR5CHija8chbWtv97Mis";
+
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const STATUS = ["Nova", "Em análise", "Aprovada para envio", "Enviada",
+                "Enviar manualmente", "Descartada", "Retorno recebido"];
+
+let vagas = [];
+let usuario = null;
+
+const $ = (id) => document.getElementById(id);
+const classePill = (s) => "s-" + String(s || "Nova").split(" ")[0];
+
+function avisar(alvo, texto, tipo = "erro") {
+  $(alvo).innerHTML = texto ? `<div class="aviso ${tipo}">${texto}</div>` : "";
+}
+
+// ------------------------------------------------------------------- sessão
+async function entrar() {
+  const email = $("email").value.trim();
+  if (!email) return avisar("avisoLogin", "Informe o e-mail.");
+  $("btnEntrar").disabled = true;
+  const { error } = await sb.auth.signInWithOtp({
+    email, options: { emailRedirectTo: window.location.href },
+  });
+  $("btnEntrar").disabled = false;
+  avisar("avisoLogin",
+    error ? "Não consegui enviar: " + error.message
+          : "Link enviado. Abra seu e-mail neste mesmo aparelho.",
+    error ? "erro" : "ok");
+}
+
+async function sair() { await sb.auth.signOut(); location.reload(); }
+
+// -------------------------------------------------------------------- dados
+async function carregar() {
+  const { data, error } = await sb.from("vagas").select("*");
+  if (error) { avisar("aviso", "Erro ao carregar: " + error.message); return; }
+  vagas = data || [];
+  $("sub").textContent =
+    `${usuario.email} · ${vagas.length} vaga${vagas.length === 1 ? "" : "s"} · atualizado agora`;
+  render();
+  await atualizarPaineisDeAcao();
+}
+
+async function mudarStatus(id, status) {
+  const antes = vagas.find(v => v.id === id)?.status;
+  const v = vagas.find(v => v.id === id);
+  if (v) { v.status = status; render(); }               // resposta imediata
+  const { error } = await sb.from("vagas").update({ status }).eq("id", id);
+  if (error) {
+    if (v) v.status = antes;                             // desfaz se o banco recusou
+    render();
+    avisar("aviso", "Não consegui salvar: " + error.message);
+  } else {
+    avisar("aviso", "");
+  }
+}
+
+// -------------------------------------------------------- buscar / enviar
+// Nenhum site consegue abrir o Chrome da sua máquina, nem acordar uma conversa com o
+// Claude sozinho — isso é o navegador impedindo que uma página comande seu computador,
+// não uma limitação da Vercel. O que dá para fazer é deixar o pedido registrado aqui;
+// alguém (você digitando "buscar"/"enviar" numa conversa, ou uma automação n8n) processa
+// depois. Este botão só enfileira.
+const ROTULOS = {
+  buscar_vagas: { verbo: "busca", elBtn: "btnBusca", elTxt: "buscaTxt", elBox: "roboBusca" },
+  processar_aprovadas: { verbo: "envio", elBtn: "btnEnvio", elTxt: "envioTxt", elBox: "roboEnvio" },
+};
+
+async function pedir(acao) {
+  const r = ROTULOS[acao];
+  const btn = $(r.elBtn);
+  btn.disabled = true;
+  const { error } = await sb.from("comandos").insert({ owner_id: usuario.id, acao });
+  btn.disabled = false;
+  if (error) return avisar("aviso", "Não consegui registrar o pedido: " + error.message);
+  avisar("aviso", "Pedido de " + r.verbo + " registrado. Digite \"" +
+    (acao === "buscar_vagas" ? "buscar" : "enviar") +
+    "\" numa conversa com o Claude para rodar na hora, ou aguarde a próxima checagem automática.", "ok");
+  await atualizarPaineisDeAcao();
+}
+
+async function atualizarPaineisDeAcao() {
+  const [{ data: pendentes }, { data: execs }] = await Promise.all([
+    sb.from("comandos").select("acao, pedido_em").eq("estado", "pendente"),
+    sb.from("execucoes").select("*").order("iniciado_em", { ascending: false }).limit(10),
+  ]);
+
+  const prontas = vagas.filter(v => v.status === "Aprovada para envio").length;
+
+  for (const [acao, r] of Object.entries(ROTULOS)) {
+    const tipo = acao === "buscar_vagas" ? "busca" : "envio";
+    const pend = (pendentes || []).find(c => c.acao === acao);
+    const ultima = (execs || []).find(e => e.tipo === tipo);
+    const box = $(r.elBox);
+
+    if (acao === "processar_aprovadas") {
+      box.classList.toggle("pronto", prontas > 0);
+      $(r.elBtn).disabled = !prontas && !!pend;
+    }
+
+    let txt;
+    if (pend) {
+      txt = "Pedido pendente desde " + new Date(pend.pedido_em).toLocaleString("pt-BR")
+        + " — aguardando processamento.";
+    } else if (ultima?.estado === "rodando") {
+      txt = "Rodando agora (iniciado às " + new Date(ultima.iniciado_em).toLocaleTimeString("pt-BR") + ")…";
+    } else if (ultima) {
+      const quando = new Date(ultima.concluido_em || ultima.iniciado_em).toLocaleString("pt-BR");
+      txt = "Última atualização: " + quando + (ultima.resumo ? " — " + ultima.resumo : "");
+    } else if (acao === "processar_aprovadas") {
+      txt = prontas
+        ? prontas + (prontas === 1 ? " vaga aprovada esperando envio." : " vagas aprovadas esperando envio.")
+        : "Nenhuma vaga aprovada no momento.";
+    } else {
+      txt = "Ainda sem nenhuma busca registrada.";
+    }
+    $(r.elTxt).textContent = txt;
+  }
+}
+
+// ------------------------------------------------------------------ desenho
+function render() {
+  const busca = $("busca").value.toLowerCase();
+  const fs = $("fstatus").value;
+  const ordem = $("ordem").value;
+
+  const n = (s) => vagas.filter(v => v.status === s).length;
+  $("cards").innerHTML = [
+    ["Mapeadas", vagas.length],
+    ["Aprovadas", n("Aprovada para envio")],
+    ["Enviadas", n("Enviada")],
+    ["Envio manual", n("Enviar manualmente")],
+    ["Retornos", n("Retorno recebido")],
+  ].map(([l, v]) => `<div class="card"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
+
+  let lista = vagas.filter(v => {
+    const txt = `${v.cargo} ${v.empresa} ${v.palavras || ""} ${v.localizacao || ""}`.toLowerCase();
+    return (!busca || txt.includes(busca)) && (!fs || v.status === fs);
+  });
+
+  lista.sort((a, b) =>
+    ordem === "empresa" ? (a.empresa || "").localeCompare(b.empresa || "")
+    : ordem === "recente" ? new Date(b.criado_em) - new Date(a.criado_em)
+    : (b.pontuacao || 0) - (a.pontuacao || 0));
+
+  if (!vagas.length) {
+    $("lista").innerHTML = `<div class="vazio"><strong>Nenhuma vaga ainda.</strong><br>
+      Clique em "Buscar" acima, ou digite "buscar" numa conversa com o Claude.</div>`;
+    return;
+  }
+  if (!lista.length) { $("lista").innerHTML = `<div class="vazio">Nada com esses filtros.</div>`; return; }
+
+  $("lista").innerHTML = lista.map(v => {
+    const titulo = v.link
+      ? `<a href="${v.link}" target="_blank" rel="noopener noreferrer">${esc(v.cargo)}</a>`
+      : esc(v.cargo);
+    const detalhe = [v.empresa, v.localizacao, v.modalidade].filter(Boolean).map(esc).join(" · ");
+    const obs = v.motivo ? `<div class="meta" style="margin-top:6px">${esc(v.motivo)}</div>`
+             : v.candidatura_em ? `<div class="meta" style="margin-top:6px">Enviada em ${fmt(v.candidatura_em)}</div>`
+             : v.palavras ? `<div class="meta" style="margin-top:6px">${esc(v.palavras)}</div>` : "";
+    const acoes = v.status === "Enviada" ? "" : `<div class="acoes">
+        ${v.status !== "Aprovada para envio"
+          ? `<button class="primary" data-id="${v.id}" data-st="Aprovada para envio">Aprovar envio</button>` : ""}
+        ${v.status !== "Descartada"
+          ? `<button data-id="${v.id}" data-st="Descartada">Descartar</button>` : ""}
+        ${v.status !== "Nova"
+          ? `<button data-id="${v.id}" data-st="Nova">Voltar p/ Nova</button>` : ""}
+      </div>`;
+    return `<div class="vaga ${v.status === "Descartada" ? "dim" : ""}">
+      <div class="topo">
+        <div style="min-width:0">
+          <h3>${titulo}</h3>
+          <div class="meta">${detalhe}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="pts">${v.pontuacao ?? "–"}</div>
+          <span class="pill ${classePill(v.status)}">${esc(v.status)}</span>
+        </div>
+      </div>${obs}${acoes}</div>`;
+  }).join("");
+
+  $("lista").querySelectorAll("button[data-id]").forEach(b =>
+    b.onclick = () => mudarStatus(b.dataset.id, b.dataset.st));
+}
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g,
+  c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = (d) => d ? new Date(d + "T12:00:00").toLocaleDateString("pt-BR") : "";
+
+// ----------------------------------------------------------------- arranque
+STATUS.forEach(s => {
+  const o = document.createElement("option"); o.value = o.textContent = s;
+  $("fstatus").appendChild(o);
+});
+
+window.entrar = entrar;
+window.sair = sair;
+window.render = render;
+window.pedir = pedir;
+window.carregar = carregar;
+
+sb.auth.onAuthStateChange((_e, sessao) => {
+  usuario = sessao?.user ?? null;
+  $("telaLogin").classList.toggle("hidden", !!usuario);
+  $("telaApp").classList.toggle("hidden", !usuario);
+  if (usuario) carregar();
+});
+
+(async () => {
+  const { data } = await sb.auth.getSession();
+  usuario = data.session?.user ?? null;
+  $("telaLogin").classList.toggle("hidden", !!usuario);
+  $("telaApp").classList.toggle("hidden", !usuario);
+  if (usuario) carregar();
+})();
+</script>
+</body>
+</html>
